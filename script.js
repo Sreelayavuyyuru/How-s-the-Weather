@@ -13,7 +13,7 @@ function fetchtheWeather() {
     var weather = resp.weather[0].description;
     console.log(weather);
     var c = city.capitalize();
-    var intext = c + " is experiencing " + weather;
+    var intext = c + " is experiencing " + weather + "";
     $('#answer').text(intext);
   };
   xhrRequest.open('GET', url, true);
@@ -23,25 +23,6 @@ function fetchtheWeather() {
 $('#city-button').click(fetchtheWeather);
 
 // Location based weather from here
-
-
-function fetchtheWeatherByLoc() {
-  var city = $('#fetch-city').val();
-  console.log(city);
-  var url1 = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=a720ef74e9417eb6222991d3b7efcc7e";
-  var xhrRequest = new XMLHttpRequest();
-  xhrRequest.onload = function () {
-    console.log(xhrRequest.response);
-    var resp = JSON.parse(xhrRequest.response);
-    var weather = resp.weather[0].description;
-    console.log(weather);
-    var c = city.capitalize();
-    var intext = c + " is experiencing " + weather;
-    $('#answer').text(intext);
-  };
-  xhrRequest.open('GET', url1, true);
-  xhrRequest.send();
-}
 
 var x = document.getElementById("answer");
 
@@ -57,23 +38,25 @@ function getLoc(){
   } else {
     alert("Sorry, your browser does not support geolocation services.");
   }
-  fetchWeatherbyLoc();
-}
-
-function fetchWeatherbyLoc(){
-  var url2 = "api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=a720ef74e9417eb6222991d3b7efcc7e";
-  console.log(url2);
-  var xhrRequest = new XMLHttpRequest();
-  xhrRequest.onload = function () {
-    console.log(xhrRequest.response);
-    var resp = JSON.parse(xhrRequest.response);
-    var weather = resp.weather[0].description;
-    console.log(weather);
-    // var intext = c + " is experiencing " + weather;
-    // $('#answer').text(intext);
+  setTimeout(function(){
+    // lat = parseInt(lat)+1;
+    // lon = parseInt(lon)+1;
+    var url2 = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=a720ef74e9417eb6222991d3b7efcc7e";
+    console.log(url2);
+    var xhrRequest = new XMLHttpRequest();
+    xhrRequest.onload = function () {
+      console.log(xhrRequest.response);
+      var resp = JSON.parse(xhrRequest.response);
+      console.log(resp);
+      var weather = resp.weather[0].description;
+      // console.log(weather);
+      var c = resp.name.capitalize();
+      var intext = c + " is experiencing " + weather;
+      $('#answer').text(intext);
+    }
     xhrRequest.open('GET', url2, true);
     xhrRequest.send();
-  }
+  }, 5000)
 }
 
 $('#fetch-weather').click(getLoc);
