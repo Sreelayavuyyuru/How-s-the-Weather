@@ -11,6 +11,6 @@
 
 https://user-images.githubusercontent.com/63154588/122412899-99176c00-cfa3-11eb-83c9-6e129b650896.mp4
 
+The site is published at the github pages. Check it out!!
 
-
-## Used Open Weather API for this. You can
+## Used Open Weather API for this.
